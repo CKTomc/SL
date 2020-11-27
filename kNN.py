@@ -11,6 +11,6 @@ def kNN(element,k):
         nearest.add((dist,d))
     nearest=list(nearest)
     nearest=[nearest[neighbour][1] for neighbour in range(k)]
-    #now for the estimation, which is not always requiered
+    #now for the estimation, which is not always required
     estimation= sum(neighbour[output_ind] for neighbour in nearest)
     return nearest,estimation
