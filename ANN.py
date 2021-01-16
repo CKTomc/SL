@@ -90,6 +90,15 @@ class NN:
             loss = mse_loss(all_y_trues, y_preds)
             print("Epoch %d loss: %.3f" % (epoch, loss))
 
+#dataset
+data = np.array(<listofdata>)
+all_y_trues = np.array([listoftargetsvalues])
+#train
+network = NN()
+network.train(data, all_y_trues)
+# test
+entryex=[1,2,3]
+print("%.3f" % network.feedforward(entryex))
 
     
   
