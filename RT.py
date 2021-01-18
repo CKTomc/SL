@@ -39,20 +39,46 @@ def newtree(data,features,features_values,head,depth,d,target,categorical_featur
         head.value=value
         d+=1           
         
-        if categorical_features.get(feature)!=None:           
-           
+        if categorical_features.get(feature)!=None: 
            dataleft=[d for d in data if d[features_subset[feature]]==value]
            dataright=[d for d in data if d[features_subset[feature]]!=value]
-           features_values_right=get_features_values(dataright,target,features)
-           features_values_left=get_features_values(dataleft,target,features)
+           features_values_right=get_features_values(dataright,features)
+           features_values_left=get_features_values(dataleft,features)
            del(features_values_left[feature])
            
         else:
            dataleft=[d for d in data if d[features_subset[feature]]<=value]
            dataright=[d for d in data if d[features_subset[feature]]>value] 
-           features_values_right=get_features_values(dataright,target,features)
-           features_values_left=get_features_values(dataleft,target,features)
+           features_values_right=get_features_values(dataright,features)
+           features_values_left=get_features_values(dataleft,features)
            features_values_left[feature].remove(value)
            
-        if d<depth :           
+        if d<depth :   
+               features_left=getfeatures(features,features_values_left)       
+               features_right=getfeatures(features,features_values_right)            
+                             
+               if features_left!=[] and features_right!=[]:
+                   head.leftchild=node()
+                   head.rightchild=node() 
+                   newtree(dataleft,features_left,features_values_left,head.leftchild,depth,d,target,categorical_features)              
+                   newtree(dataright,features_right,features_values_right,head.rightchild,depth,d,target,categorical_features)
+                
+               elif features_left==[] and features_right!=[] :
+                   head.outputleft=sum(ins[target] for ins in dataleft)/len(dataleft)
+                   head.rightchild=node()
+                   newtree(dataright,features_right,features_values_right,head.rightchild,depth,d,target,categorical_features)
+                   
+               elif features_left!=[] and features_right==[]:
+                   head.outputright=sum(ins[target] for ins in dataright)/len(dataright)
+                   head.leftchild=node()
+                   newtree(dataleft,features_left,features_values_left,head.leftchild,depth,d,target,categorical_features)              
+               
+               else:
+                    head.outputleft=sum(ins[target] for ins in dataleft)/len(dataleft)
+                    head.outputright=sum(ins[target] for ins in dataright)/len(dataright)
+          
+            
+        else:
+                head.outputleft=sum(ins[target] for ins in dataleft)/len(dataleft)
+                head.outputright=sum(ins[target] for ins in dataright)/len(dataright)
    
