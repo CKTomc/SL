@@ -1,3 +1,8 @@
+#data is an iterable object
+#features_values is a dict of feature:[<values>]
+#getfeatures operates by verifying which valid features to select for the next step
+from random import randrange
+
 class node():
     def __init__(self):
         self.feature=None
@@ -7,8 +12,7 @@ class node():
         self.rightchild=None
         self.outputleft=None
         self.outputright=None
- 
-        
+
 def newtree(data,features,features_values,head,depth,d,target,categorical_features):      
         loss=10000000000000
         for f in features:
@@ -82,3 +86,29 @@ def newtree(data,features,features_values,head,depth,d,target,categorical_featur
                 head.outputleft=sum(ins[target] for ins in dataleft)/len(dataleft)
                 head.outputright=sum(ins[target] for ins in dataright)/len(dataright)
    
+
+def prediction(instance,head,categorical_features):
+    if instance[head.position]==head.value:
+        if head.leftchild!=None:
+            return prediction(instance,head.leftchild,categorical_features)
+        else:
+            return head.outputleft
+    else:
+        if categorical_features.get(head.feature)!=None or (categorical_features.get(head.feature)==None and instance[head.position]>head.value): 
+           if head.rightchild!=None:
+              return prediction(instance,head.rightchild,categorical_features)
+           else:
+              return head.outputright
+        if categorical_features.get(head.feature)==None and instance[head.position]<head.value:        
+            if head.leftchild!=None:
+                return prediction(instance,head.leftchild,categorical_features)
+            else: 
+                return head.outputleft
+    
+/*create*/
+tree=node()
+newtree(data,features,features_values,tree,depth,d,target,categorical_features)
+/*test*/
+testpoint=data[randrange(len(data))]
+predicted=prediction(instance,tree)
+print("target:",testpoint[target],",prediction:',predicted")
