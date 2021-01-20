@@ -1,6 +1,6 @@
 #data is an iterable object
 #features_values is a dict of feature:[<values>]
-#getfeatures operates by verifying which valid features to select for the next step
+#getfeatures operates by verifying which features are valid for the next step
 from random import randrange
 
 class node():
