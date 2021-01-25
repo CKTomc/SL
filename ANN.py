@@ -5,7 +5,7 @@ def activate(x):
   return 1 / (1+np.exp(-x))
 
 def deriv_act_fun(x):
-  fx = activation_fun(x)
+  fx = activate(x)
   return fx*(1-fx)
 
 def mse_loss(y_true, y_pred):
