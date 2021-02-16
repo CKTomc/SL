@@ -1,5 +1,6 @@
 import numpy as np
 
+#Feedforward nn
 def activate(x):
   # for example sigmoid
   return 1 / (1+np.exp(-x))
