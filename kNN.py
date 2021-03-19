@@ -39,4 +39,4 @@ print(classifier.predict_proba(random.choice(data)))
 from sklearn.neighbors import NearestNeighbors
 neighbourhood=NearestNeighbors(n_neighbors=5)
 neighbourhood.fit(data)
-print(neighbourhood.kneighbors(random.choice(data)))
+print(neighbourhood.kneighbors(random.choice(data))) # returns neighbours inds with distances
