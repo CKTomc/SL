@@ -116,7 +116,20 @@ print("target:",testpoint[target],",prediction:",predicted)
 ****************using sklearn****************
 from sklearn.tree import DecisionTreeRegressor
 import random
+global output_ind
+global data
+global output
+global test
+
+output_ind= the index of the output
+<intialize the data>
+output=[x[output_ind] for x in data]
+data=[x[:-1] for x in data]
+<initialize test data>
+
 regressor=DecisionTreeRegressor(max_depth=6)
 regressor.fit(data,output)
 
-prediction=regressor.predict()
+testpoint=random.choice(test)
+prediction=regressor.predict(testpoint)
+print(testpoint,prediction)
