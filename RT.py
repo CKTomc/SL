@@ -110,5 +110,13 @@ tree=node()
 newtree(data,features,features_values,tree,depth,d,target,categorical_features)
 /*test*/
 testpoint=data[randrange(len(data))]
-predicted=prediction(instance,tree)
-print("target:",testpoint[target],",prediction:',predicted")
+predicted=prediction(testpoint,tree)
+print("target:",testpoint[target],",prediction:",predicted)
+
+****************using sklearn****************
+from sklearn.tree import DecisionTreeRegressor
+import random
+regressor=DecisionTreeRegressor(max_depth=6)
+regressor.fit(data,output)
+
+prediction=regressor.predict()
