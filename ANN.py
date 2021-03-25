@@ -33,6 +33,7 @@ class NN:
     out = activate(self.w5*u1+self.w6*u2+self.b3)
     return out
 
+  
   def train(self, data, all_y_trues):
     epochs = 1000 
     learn_rate = 0.1
@@ -101,5 +102,10 @@ network.train(data, all_y_trues)
 entryex=[1,2,3]
 print("%.3f" % network.feedforward(entryex))
 
-    
-  
+******************using sklearn******************
+from sklearn.neural_network import MLPClassifier #backpropagation
+
+classifier = MLPClassifier(solver='lbfgs',alpha=1e-5,hidden_layer_sizes=(2,), random_state=1)
+classifier.fit(data,output)
+testpoint=random.choice(data)
+classifier.predict(testpoint)
