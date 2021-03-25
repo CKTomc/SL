@@ -1,8 +1,8 @@
 import numpy as np
 
-#Feedforward nn
+#feedforward 
 def activate(x):
-  # for example sigmoid
+  # sigmoid
   return 1 / (1+np.exp(-x))
 
 def deriv_act_fun(x):
@@ -104,8 +104,19 @@ print("%.3f" % network.feedforward(entryex))
 
 ******************using sklearn******************
 from sklearn.neural_network import MLPClassifier #backpropagation
+import random
+global output_ind
+global data
+global output
+global test
+
+output_ind= the index of the output
+<intialize the data>
+output=[x[output_ind] for x in data]
+data=[x[:-1] for x in data]
+<initialize test data>
 
 classifier = MLPClassifier(solver='lbfgs',alpha=1e-5,hidden_layer_sizes=(2,), random_state=1)
 classifier.fit(data,output)
 testpoint=random.choice(data)
-classifier.predict(testpoint)
+classifier.predict([testpoint])
