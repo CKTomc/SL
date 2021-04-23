@@ -1,4 +1,4 @@
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier #or Regressor
 import random
 global output_ind
 global data
@@ -11,6 +11,6 @@ data=[x[:-1] for x in data]
 
 classifier = RandomForestClassifier(max_depth=6, random_state=0)
 classifier=classifier.fit(data,output)
-testpoint=random.choice(test)
+testpoint=[random.choice(test)]
 prediction=classifier.predict(testpoint)
 print(testpoint,prediction)
