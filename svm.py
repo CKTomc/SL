@@ -1,9 +1,15 @@
 import numpy as np
-from sklearn.datasets import make_classification 
-from sklearn.model_selection import train_test_split
+import random
 from sklearn import svm
-X, y = make_classification(n_samples=10, random_state=0)
-X_train , X_test , y_train, y_test = train_test_split(X, y, random_state=0)
+global output_ind
+global data
+global outpututput_ind= the index of the output
+
+<intialize the data>
+output=[x[output_ind] for x in data]
+data=[x[:-1] for x in data]
+
+X_train , X_test , y_train, y_test = train_test_split(data, output, random_state=0)
 clf = svm.SVC(kernel='precomputed')
 gram_train = np.dot(X_train, X_train.T)
 clf.fit(gram_train, y_train)
