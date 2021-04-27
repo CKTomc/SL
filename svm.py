@@ -3,8 +3,9 @@ import random
 from sklearn import svm
 global output_ind
 global data
-global outpututput_ind= the index of the output
+global output
 
+output_ind= the index of the output
 <intialize the data>
 output=[x[output_ind] for x in data]
 data=[x[:-1] for x in data]
